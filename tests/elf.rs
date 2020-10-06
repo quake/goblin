@@ -100,6 +100,12 @@ fn test_parse_gnu_hash_section_32bit() {
 }
 
 #[test]
+fn test_parse_symbol_hash_table_offset_overflow() {
+    let bytes = include_bytes!("bins/elf/malformed/crash-a4c45f5622654c0e625558dc1ca0921abbcf40ac");
+    assert!(Elf::parse(bytes).is_err());
+}
+
+#[test]
 fn test_oom() {
     use goblin::container::{Container, Ctx};
     use scroll::Pwrite;
